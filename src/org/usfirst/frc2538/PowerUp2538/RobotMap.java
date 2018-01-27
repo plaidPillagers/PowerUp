@@ -35,6 +35,7 @@ public class RobotMap {
     public static WPI_TalonSRX driveTrainTalonSRX3;
     public static DifferentialDrive driveTrainDifferentialDrive1;
     public static WPI_TalonSRX driveTrainCenterMotor;
+    public static DoubleSolenoid driveTrainhUp;
     public static Compressor pnuematicsCompressor;
     public static DoubleSolenoid pnuematicsTransmissionsSolonoid;
     public static DoubleSolenoid pnuematicsGearGateSolonoid;
@@ -66,6 +67,9 @@ public class RobotMap {
 
         driveTrainCenterMotor = new WPI_TalonSRX(7);
         
+        
+        driveTrainhUp = new DoubleSolenoid(1, 6, 7);
+        LiveWindow.addActuator("DriveTrain", "hUp", driveTrainhUp);
         
         pnuematicsCompressor = new Compressor(0);
         LiveWindow.addActuator("pnuematics", "Compressor ", pnuematicsCompressor);

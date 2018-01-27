@@ -13,6 +13,7 @@ package org.usfirst.frc2538.PowerUp2538.commands;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc2538.PowerUp2538.Robot;
+import org.usfirst.frc2538.PowerUp2538.RobotMap;
 
 /**
  *
@@ -37,7 +38,6 @@ public class AutonomousCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    
     }
 
     // Called repeatedly when this Command is scheduled to run

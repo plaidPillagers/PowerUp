@@ -76,7 +76,6 @@ public class OI {
 
 
         // SmartDashboard Buttons
-        SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
         SmartDashboard.putData("GoForward", new GoForward());
         SmartDashboard.putData("StopGoJuice", new StopGoJuice());
 
