@@ -36,9 +36,10 @@ public class RobotMap {
     public static DifferentialDrive driveTrainDifferentialDrive1;
     public static WPI_TalonSRX driveTrainCenterMotor;
     public static DoubleSolenoid driveTrainhUp;
+    public static WPI_TalonSRX driveTrainTalonSRX2;
+    public static WPI_TalonSRX driveTrainTalonSRX4;
+    public static DifferentialDrive driveTrainDifferentialDrive2;
     public static Compressor pnuematicsCompressor;
-    public static DoubleSolenoid pnuematicsTransmissionsSolonoid;
-    public static DoubleSolenoid pnuematicsGearGateSolonoid;
     public static WPI_TalonSRX elevatorTalonSRX4;
     public static WPI_TalonSRX elevatorTalonSRX5;
     public static DoubleSolenoid liftDoubleSolenoid1;
@@ -56,7 +57,7 @@ public class RobotMap {
         driveTrainTalonSRX1 = new WPI_TalonSRX(1);
         
         
-        driveTrainTalonSRX3 = new WPI_TalonSRX(6);
+        driveTrainTalonSRX3 = new WPI_TalonSRX(4);
         
         
         driveTrainDifferentialDrive1 = new DifferentialDrive(driveTrainTalonSRX1, driveTrainTalonSRX3);
@@ -65,40 +66,46 @@ public class RobotMap {
         driveTrainDifferentialDrive1.setExpiration(0.1);
         driveTrainDifferentialDrive1.setMaxOutput(1.0);
 
-        driveTrainCenterMotor = new WPI_TalonSRX(7);
+        driveTrainCenterMotor = new WPI_TalonSRX(3);
         
         
-        driveTrainhUp = new DoubleSolenoid(1, 6, 7);
+        driveTrainhUp = new DoubleSolenoid(0, 0, 1);
         LiveWindow.addActuator("DriveTrain", "hUp", driveTrainhUp);
         
+        driveTrainTalonSRX2 = new WPI_TalonSRX(6);
+        
+        
+        driveTrainTalonSRX4 = new WPI_TalonSRX(7);
+        
+        
+        driveTrainDifferentialDrive2 = new DifferentialDrive(driveTrainTalonSRX2, driveTrainTalonSRX4);
+        LiveWindow.addActuator("DriveTrain", "Differential Drive 2", driveTrainDifferentialDrive2);
+        driveTrainDifferentialDrive2.setSafetyEnabled(true);
+        driveTrainDifferentialDrive2.setExpiration(0.1);
+        driveTrainDifferentialDrive2.setMaxOutput(1.0);
+
         pnuematicsCompressor = new Compressor(0);
         LiveWindow.addActuator("pnuematics", "Compressor ", pnuematicsCompressor);
         
-        pnuematicsTransmissionsSolonoid = new DoubleSolenoid(0, 0, 1);
-        LiveWindow.addActuator("pnuematics", "Transmissions Solonoid ", pnuematicsTransmissionsSolonoid);
-        
-        pnuematicsGearGateSolonoid = new DoubleSolenoid(0, 2, 3);
-        LiveWindow.addActuator("pnuematics", "Gear Gate Solonoid", pnuematicsGearGateSolonoid);
-        
-        elevatorTalonSRX4 = new WPI_TalonSRX(4);
+        elevatorTalonSRX4 = new WPI_TalonSRX(9);
         
         
         elevatorTalonSRX5 = new WPI_TalonSRX(5);
         
         
-        liftDoubleSolenoid1 = new DoubleSolenoid(0, 4, 5);
+        liftDoubleSolenoid1 = new DoubleSolenoid(1, 0, 1);
         LiveWindow.addActuator("Lift", "Double Solenoid 1", liftDoubleSolenoid1);
         
-        liftDoubleSolenoid2 = new DoubleSolenoid(0, 6, 7);
+        liftDoubleSolenoid2 = new DoubleSolenoid(1, 2, 3);
         LiveWindow.addActuator("Lift", "Double Solenoid 2", liftDoubleSolenoid2);
         
-        liftDoubleSolenoid3 = new DoubleSolenoid(1, 0, 1);
+        liftDoubleSolenoid3 = new DoubleSolenoid(1, 4, 5);
         LiveWindow.addActuator("Lift", "Double Solenoid 3", liftDoubleSolenoid3);
         
-        liftDoubleSolenoid4 = new DoubleSolenoid(1, 2, 3);
+        liftDoubleSolenoid4 = new DoubleSolenoid(1, 6, 7);
         LiveWindow.addActuator("Lift", "Double Solenoid 4", liftDoubleSolenoid4);
         
-        boxClappersDoubleSolenoid5 = new DoubleSolenoid(1, 4, 5);
+        boxClappersDoubleSolenoid5 = new DoubleSolenoid(0, 4, 5);
         LiveWindow.addActuator("BoxClappers", "Double Solenoid 5", boxClappersDoubleSolenoid5);
         
         boxClappersSpeedController1 = new Spark(0);
