@@ -106,9 +106,21 @@ public class DriveTrain extends Subsystem {
    			 differentialDrive1.arcadeDrive(0,0);
    			centerMotor.set(0);
    			return true;
+   		 }  		 
+   	 } 
+   	 
+   	 public boolean driveStriaght(double x, double length){
+   		 if (talonSRX3.getSensorCollection().getQuadraturePosition()<centerEncoderValue+length){
+   			differentialDrive1.arcadeDrive(x, 0);
+    		return false;
+   		 } else{
+   			 differentialDrive1.arcadeDrive(0,0);
+   			return true;
    		 }
-   		 
-   		 
+   	 }
+   	 
+   	 public void stopHWheel(){
+   		 centerMotor.set(0);
    	 }
 }
 
