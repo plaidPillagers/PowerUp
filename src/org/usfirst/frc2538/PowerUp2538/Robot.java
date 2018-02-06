@@ -107,7 +107,9 @@ public class Robot extends TimedRobot {
     		goLeft = false;
 			//Put right auto code here	
 		}
-		  //autonomousCommand = chooser.getSelected();
+		autonomousCommand = chooser.getSelected();
+		Robot.driveTrain.initAutoVariables();
+		
 	        // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
@@ -127,6 +129,7 @@ public class Robot extends TimedRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        Robot.driveTrain.hWheelDown();
     }
 
     /**
