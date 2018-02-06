@@ -128,23 +128,29 @@ public class DriveTrain extends Subsystem {
 	public boolean driveStraight(double x, double length) {
 		if (delayed && timer.get() < delayTime) {
 			differentialDrive1.arcadeDrive(0, 0);
+			SmartDashboard.putBoolean("delayed", delayed);
 			return false;
 		} else if (delayed && timer.get() >= delayTime) {
 			moveAfterDelay = true;
+			SmartDashboard.putBoolean("delayed", delayed);
+			SmartDashboard.putBoolean("move after delay", moveAfterDelay);
 			return false;
 		} else if (!moveAfterDelay && getForwardRange() <= tooCloseForComfort) {
 			timer.reset();
 			timer.start();
 			delayed = true;
+			SmartDashboard.putString("obsticle", "yes");
 			return false;
 		} else {
 			double encoderValue = talonSRX3.getSensorCollection().getQuadraturePosition();
-			if (findRearDistance() > distanceToWall || encoderValue < centerEncoderValue + length) {
+			if (findRearDistance() <= distanceToWall || encoderValue < centerEncoderValue + length) {
 				differentialDrive1.arcadeDrive(x, 0);
 				SmartDashboard.putNumber("not h wheel encoder", encoderValue);
+				SmartDashboard.putString("Moving forward", "yes");
 				return false;
 			} else {
 				differentialDrive1.arcadeDrive(0, 0);
+				SmartDashboard.putString("Wall detected", "yes");
 				return true;
 			}
 		}
