@@ -108,6 +108,8 @@ public class Robot extends TimedRobot {
 			//Put right auto code here	
 		}
 		autonomousCommand = chooser.getSelected();
+		Robot.driveTrain.initAutoVariables();
+		
 	        // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
