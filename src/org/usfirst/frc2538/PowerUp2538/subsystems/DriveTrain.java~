@@ -59,7 +59,7 @@ public class DriveTrain extends Subsystem {
 	private boolean delayed = false;
 	private double delayTime = 2.0;
 	private boolean moveAfterDelay = false;
-	private double tooCloseForComfort = 1.0;
+	private double tooCloseForComfort = 1.2;
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
@@ -112,20 +112,8 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public boolean driveAngle(double x, double y, double width) {
+		// TODO: make sure we are not pausing at the switch
 		double encoderValue = centerMotor.getSensorCollection().getQuadraturePosition();
-		if (encoderValue < centerEncoderValue + width) {
-			differentialDrive1.arcadeDrive(x, 0);
-			centerMotor.set(y);
-			SmartDashboard.putNumber("h wheel encoder", encoderValue);
-			return false;
-		} else {
-			differentialDrive1.arcadeDrive(0, 0);
-			centerMotor.set(0);
-			return true;
-		}
-	}
-
-	public boolean driveStraight(double x, double length) {
 		if (delayed && timer.get() < delayTime) {
 			differentialDrive1.arcadeDrive(0, 0);
 			SmartDashboard.putBoolean("delayed", delayed);
@@ -139,11 +127,57 @@ public class DriveTrain extends Subsystem {
 			timer.reset();
 			timer.start();
 			delayed = true;
-			SmartDashboard.putString("obsticle", "yes");
+			SmartDashboard.putString("obstacle", "yes");
+			return false;
+		} else if (encoderValue < centerEncoderValue + width) {
+			differentialDrive1.arcadeDrive(x, 0);
+			centerMotor.set(y);
+			SmartDashboard.putNumber("h wheel encoder", encoderValue);
 			return false;
 		} else {
+			differentialDrive1.arcadeDrive(0, 0);
+			centerMotor.set(0);
+			return true;
+		}
+	}
+	
+	public boolean driveAngleNoMatterWhat(double x, double y, double width) {
+		double encoderValue = centerMotor.getSensorCollection().getQuadraturePosition();
+		 if (encoderValue < centerEncoderValue + width) {
+			differentialDrive1.arcadeDrive(x, 0);
+			centerMotor.set(y);
+			SmartDashboard.putNumber("h wheel encoder", encoderValue);
+			return false;
+		} else {
+			differentialDrive1.arcadeDrive(0, 0);
+			centerMotor.set(0);
+			return true;
+		}
+	}
+	
+	public boolean needToContinue(){
+		return (delayed||moveAfterDelay);
+	}
+
+	public boolean driveStraight(double x, double length) {
+//		if (delayed && timer.get() < delayTime) {
+//			differentialDrive1.arcadeDrive(0, 0);
+//			SmartDashboard.putBoolean("delayed", delayed);
+//			return false;
+//		} else if (delayed && timer.get() >= delayTime) {
+//			moveAfterDelay = true;
+//			SmartDashboard.putBoolean("delayed", delayed);
+//			SmartDashboard.putBoolean("move after delay", moveAfterDelay);
+//			return false;
+//		} else if (!moveAfterDelay && getForwardRange() <= tooCloseForComfort) {
+//			timer.reset();
+//			timer.start();
+//			delayed = true;
+//			SmartDashboard.putString("obstacle", "yes");
+//			return false;
+//		} else {
 			double encoderValue = talonSRX3.getSensorCollection().getQuadraturePosition();
-			if (findRearDistance() <= distanceToWall || encoderValue < centerEncoderValue + length) {
+			if (findRearDistance() <= distanceToWall && encoderValue < wheelEncoderValue + length) {
 				differentialDrive1.arcadeDrive(x, 0);
 				SmartDashboard.putNumber("not h wheel encoder", encoderValue);
 				SmartDashboard.putString("Moving forward", "yes");
@@ -153,7 +187,7 @@ public class DriveTrain extends Subsystem {
 				SmartDashboard.putString("Wall detected", "yes");
 				return true;
 			}
-		}
+		//}
 	}
 	
 	public void initAutoVariables(){

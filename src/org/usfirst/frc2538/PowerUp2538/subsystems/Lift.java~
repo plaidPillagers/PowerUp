@@ -57,14 +57,19 @@ public class Lift extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    public void raiseFrame(){
+    public void lowerFrame(){
     	doubleSolenoid1.set(DoubleSolenoid.Value.kForward);
-  		 SmartDashboard.putBoolean("Rising Frame",true);
+  		 SmartDashboard.putBoolean("lowering Frame",true);   	
+  		 doubleSolenoid2.set(DoubleSolenoid.Value.kForward);  
+  		 doubleSolenoid3.set(DoubleSolenoid.Value.kForward);
+  		 doubleSolenoid4.set(DoubleSolenoid.Value.kForward);
   	 }
-  	 public void lowerFrame(){
+  	 public void raiseFrame(){
   		doubleSolenoid1.set(DoubleSolenoid.Value.kReverse);
- 		 SmartDashboard.putBoolean("Lowering Frame",false);
-
+ 		 SmartDashboard.putBoolean("Raising Frame",false);
+ 		doubleSolenoid2.set(DoubleSolenoid.Value.kReverse);
+		doubleSolenoid3.set(DoubleSolenoid.Value.kReverse);
+	    doubleSolenoid4.set(DoubleSolenoid.Value.kReverse);
   	 }
 
 }

@@ -47,7 +47,7 @@ public class Auto extends CommandGroup {
     	// negative y means "left"; x is always positive, h is the number of rotations 
     	// of h wheel:
     	addSequential(new AutoLowerHWheel(),1);
-    	addSequential(new AutoDriveAngle(-0.7,-0.5,2000), 2);
+    	addSequential(new AutoDriveAngle(-0.7,0.5,2000), 2);
     	addSequential(new AutoDriveStraight(-0.7),3);
     } 
 }

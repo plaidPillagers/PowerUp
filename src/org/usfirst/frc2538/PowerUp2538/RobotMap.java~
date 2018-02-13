@@ -93,7 +93,7 @@ public class RobotMap {
         driveTrainforwardRangeFinder = new AnalogInput(1);
         LiveWindow.addSensor("DriveTrain", "forwardRangeFinder", driveTrainforwardRangeFinder);
         
-        pnuematicsCompressor = new Compressor(0);
+        pnuematicsCompressor = new Compressor(20);
         LiveWindow.addActuator("pnuematics", "Compressor ", pnuematicsCompressor);
         
         elevatorTalonSRX42 = new WPI_TalonSRX(9);
@@ -102,25 +102,25 @@ public class RobotMap {
         elevatorTalonSRX5 = new WPI_TalonSRX(5);
         
         
-        liftDoubleSolenoid1 = new DoubleSolenoid(1, 0, 1);
+        liftDoubleSolenoid1 = new DoubleSolenoid(20, 0, 1);
         LiveWindow.addActuator("Lift", "Double Solenoid 1", liftDoubleSolenoid1);
         
-        liftDoubleSolenoid2 = new DoubleSolenoid(1, 2, 3);
+        liftDoubleSolenoid2 = new DoubleSolenoid(20, 2, 3);
         LiveWindow.addActuator("Lift", "Double Solenoid 2", liftDoubleSolenoid2);
         
-        liftDoubleSolenoid3 = new DoubleSolenoid(1, 4, 5);
+        liftDoubleSolenoid3 = new DoubleSolenoid(20, 4, 5);
         LiveWindow.addActuator("Lift", "Double Solenoid 3", liftDoubleSolenoid3);
         
-        liftDoubleSolenoid4 = new DoubleSolenoid(1, 6, 7);
+        liftDoubleSolenoid4 = new DoubleSolenoid(20, 6, 7);
         LiveWindow.addActuator("Lift", "Double Solenoid 4", liftDoubleSolenoid4);
         
         boxClappersDoubleSolenoid5 = new DoubleSolenoid(0, 4, 5);
         LiveWindow.addActuator("BoxClappers", "Double Solenoid 5", boxClappersDoubleSolenoid5);
         
-        boxClappersTalonSRX52 = new WPI_TalonSRX(10);
+        boxClappersTalonSRX52 = new WPI_TalonSRX(8);
         
         
-        boxClappersTalonSRX60 = new WPI_TalonSRX(11);
+        boxClappersTalonSRX60 = new WPI_TalonSRX(10);
         
         
 
