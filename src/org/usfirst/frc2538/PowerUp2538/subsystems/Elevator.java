@@ -11,6 +11,8 @@
 
 package org.usfirst.frc2538.PowerUp2538.subsystems;
 
+import java.lang.reflect.Field;
+
 import org.usfirst.frc2538.PowerUp2538.Robot;
 import org.usfirst.frc2538.PowerUp2538.RobotMap;
 import org.usfirst.frc2538.PowerUp2538.commands.*;
@@ -21,6 +23,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.Faults;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
@@ -68,11 +72,19 @@ public class Elevator extends Subsystem {
     // here. Call these from Commands.
 
     public void configurePID (){
+    	talonSRX42.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
+    	talonSRX42.setIntegralAccumulator(0.0, 0, 0);
     	talonSRX42.selectProfileSlot(0, 0);
-    	talonSRX42.config_kP(0, 1.25e-4, 0);
-    	talonSRX42.config_kI(0,1.0e-5,0);
-    	talonSRX42.config_kD(0,1.0e-5,0);
-    	talonSRX42.config_kP(0,0.0,0);
+    	talonSRX42.configNominalOutputForward(0.0, 0);
+    	talonSRX42.configNominalOutputReverse(0.0, 0);
+    	talonSRX42.configPeakOutputForward(12.0, 0);
+    	talonSRX42.configPeakOutputReverse(-12.0, 0);
+    	
+    	talonSRX42.config_kP(0, 1.25e-3, 0);
+    	talonSRX42.config_kI(0,0.0,0);
+    	talonSRX42.config_kD(0,0.0,0);
+    	talonSRX42.config_kF(0,0.0,0);
+    	talonSRX42.configAllowableClosedloopError(10,0,0);
     }
     
     public void setElevatorPID(double target){
@@ -93,13 +105,34 @@ public class Elevator extends Subsystem {
     public void setUpperLimitSwitch(){
     	talonSRX42.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector,
     			LimitSwitchNormal.NormallyClosed,timeoutLimitSwitch);
-    	talonSRX42.overrideLimitSwitchesEnable(true);
+    	talonSRX42.overrideLimitSwitchesEnable(false);
     }
     
     public void setLowerLimitSwitch(){
     	talonSRX42.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector,
     			LimitSwitchNormal.NormallyClosed,timeoutLimitSwitch);
-    	talonSRX42.overrideLimitSwitchesEnable(true);
+    	talonSRX42.overrideLimitSwitchesEnable(false);
+    }
+    
+    private int countFaults() {
+    	Faults myFaults=new Faults();
+    	talonSRX42.getFaults(myFaults);
+    	int faultCount=0;
+    	for(Field field:myFaults.getClass().getDeclaredFields()){
+    		try {
+				if(field.getBoolean(myFaults)) {
+					SmartDashboard.putString("Fault is",field.getName());
+					faultCount+=1;
+				}
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+    	return faultCount;
     }
     
     public void printPID(){
@@ -108,6 +141,9 @@ public class Elevator extends Subsystem {
     	SmartDashboard.putString("PID 42 error code ", 
     			ErrorCode.valueOf(talonSRX42.getClosedLoopError(0)).name());
     	SmartDashboard.putNumber("PID 42 accum ", talonSRX42.getIntegralAccumulator(0));
+    	SmartDashboard.putNumber("error", talonSRX42.getClosedLoopError(0));
+    	SmartDashboard.putNumber("PID42 OutPut", talonSRX42.getMotorOutputVoltage());
+    	SmartDashboard.putNumber("PID42 enabled", countFaults());
     }
     
     public void printEncoders(){

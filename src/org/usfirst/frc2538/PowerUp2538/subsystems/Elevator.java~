@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
@@ -68,15 +69,23 @@ public class Elevator extends Subsystem {
     // here. Call these from Commands.
 
     public void configurePID (){
+    	talonSRX42.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
+    	talonSRX42.setIntegralAccumulator(0.0, 0, 0);
     	talonSRX42.selectProfileSlot(0, 0);
-    	talonSRX42.config_kP(0, 1.25e-4, 0);
-    	talonSRX42.config_kI(0,1.0e-5,0);
-    	talonSRX42.config_kD(0,1.0e-5,0);
-    	talonSRX42.config_kP(0,0.0,0);
+    	talonSRX42.configNominalOutputForward(0.0, 0);
+    	talonSRX42.configNominalOutputReverse(0.0, 0);
+    	talonSRX42.configPeakOutputForward(12.0, 0);
+    	talonSRX42.configPeakOutputReverse(-12.0, 0);
+    	
+    	talonSRX42.config_kP(0, 1.25e-3, 0);
+    	talonSRX42.config_kI(0,0.0,0);
+    	talonSRX42.config_kD(0,0.0,0);
+    	talonSRX42.config_kF(0,0.0,0);
+    	talonSRX42.configAllowableClosedloopError(10,0,0);
     }
     
     public void setElevatorPID(double target){
-    	talonSRX5.follow(talonSRX42);
+    	//talonSRX5.follow(talonSRX42);
     	talonSRX42.set(ControlMode.Position,target);    	
     }
     
@@ -92,29 +101,32 @@ public class Elevator extends Subsystem {
     
     public void setUpperLimitSwitch(){
     	talonSRX42.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector,
-    			LimitSwitchNormal.NormallyOpen,timeoutLimitSwitch);
+    			LimitSwitchNormal.NormallyClosed,timeoutLimitSwitch);
     	talonSRX42.overrideLimitSwitchesEnable(true);
     }
     
     public void setLowerLimitSwitch(){
     	talonSRX42.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector,
-    			LimitSwitchNormal.NormallyOpen,timeoutLimitSwitch);
+    			LimitSwitchNormal.NormallyClosed,timeoutLimitSwitch);
     	talonSRX42.overrideLimitSwitchesEnable(true);
     }
     
     public void printPID(){
-    	SmartDashboard.putNumber("PID 42 posistion", talonSRX42.getSelectedSensorPosition(0));
-    	SmartDashboard.putNumber("PID 42 velocity", talonSRX42.getSelectedSensorVelocity(0));
-    	SmartDashboard.putString("PID 42 error code", 
+    	SmartDashboard.putNumber("PID 42 posistion ", talonSRX42.getSelectedSensorPosition(0));
+    	SmartDashboard.putNumber("PID 42 velocity ", talonSRX42.getSelectedSensorVelocity(0));
+    	SmartDashboard.putString("PID 42 error code ", 
     			ErrorCode.valueOf(talonSRX42.getClosedLoopError(0)).name());
-    	SmartDashboard.putNumber("PID 42 accum", talonSRX42.getIntegralAccumulator(0));
+    	SmartDashboard.putNumber("PID 42 accum ", talonSRX42.getIntegralAccumulator(0));
+    	SmartDashboard.putNumber("error", talonSRX42.getClosedLoopError(0));
     }
     
     public void printEncoders(){
-    	/*double 	wheelEncoderValue = talonSRX42.getSensorCollection().getQuadraturePosition();
+    	double 	wheelEncoderValue = talonSRX42.getSensorCollection().getQuadraturePosition();
     	SmartDashboard.putNumber("encoder 42 value", wheelEncoderValue);
-    	wheelEncoderValue = talonSRX5.getSensorCollection().getQuadraturePosition();
-    	SmartDashboard.putNumber("encoder 5 value", wheelEncoderValue);*/
+    	SmartDashboard.putBoolean("Forward switch closed ", talonSRX42.getSensorCollection().isFwdLimitSwitchClosed());
+    	SmartDashboard.putBoolean("Reverse switch closed ", talonSRX42.getSensorCollection().isRevLimitSwitchClosed());
+    	//wheelEncoderValue = talonSRX5.getSensorCollection().getQuadraturePosition();
+    	//SmartDashboard.putNumber("encoder 5 value", wheelEncoderValue):
     }
     public void disablePID(){
     	talonSRX42.set(ControlMode.Disabled,0);
