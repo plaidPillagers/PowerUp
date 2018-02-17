@@ -72,23 +72,24 @@ public class Elevator extends Subsystem {
     // here. Call these from Commands.
 
     public void configurePID (){
+    	final int timeOut =0;
     	talonSRX42.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
-    	talonSRX42.setIntegralAccumulator(0.0, 0, 0);
+    	talonSRX42.setIntegralAccumulator(0.0, 0,timeOut);
     	talonSRX42.selectProfileSlot(0, 0);
-    	talonSRX42.configNominalOutputForward(0.0, 0);
-    	talonSRX42.configNominalOutputReverse(0.0, 0);
-    	talonSRX42.configPeakOutputForward(12.0, 0);
-    	talonSRX42.configPeakOutputReverse(-12.0, 0);
+    	talonSRX42.configNominalOutputForward(0.0,timeOut);
+    	talonSRX42.configNominalOutputReverse(0.0,timeOut);
+    	talonSRX42.configPeakOutputForward(12.0,timeOut);
+    	talonSRX42.configPeakOutputReverse(-12.0, timeOut);
     	
-    	talonSRX42.config_kP(0, 1.25e-3, 0);
-    	talonSRX42.config_kI(0,0.0,0);
-    	talonSRX42.config_kD(0,0.0,0);
-    	talonSRX42.config_kF(0,0.0,0);
-    	talonSRX42.configAllowableClosedloopError(10,0,0);
+    	talonSRX42.config_kP(0, 1.25e-1,timeOut);
+    	talonSRX42.config_kI(0,0.0,timeOut);
+    	talonSRX42.config_kD(0,0.0,timeOut);
+    	talonSRX42.config_kF(0,0.0,timeOut);
+    	talonSRX42.configAllowableClosedloopError(10,0,timeOut);
     }
     
     public void setElevatorPID(double target){
-    	//talonSRX5.follow(talonSRX42);
+    	talonSRX5.follow(talonSRX42);
     	talonSRX42.set(ControlMode.Position,target);    	
     }
     
@@ -105,13 +106,13 @@ public class Elevator extends Subsystem {
     public void setUpperLimitSwitch(){
     	talonSRX42.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector,
     			LimitSwitchNormal.NormallyClosed,timeoutLimitSwitch);
-    	talonSRX42.overrideLimitSwitchesEnable(false);
+    	talonSRX42.overrideLimitSwitchesEnable(true);
     }
     
     public void setLowerLimitSwitch(){
     	talonSRX42.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector,
     			LimitSwitchNormal.NormallyClosed,timeoutLimitSwitch);
-    	talonSRX42.overrideLimitSwitchesEnable(false);
+    	talonSRX42.overrideLimitSwitchesEnable(true);
     }
     
     private int countFaults() {

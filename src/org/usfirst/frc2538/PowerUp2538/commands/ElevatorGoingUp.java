@@ -40,20 +40,20 @@ public class ElevatorGoingUp extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+    	int targetDistance = 50000;
     	Robot.elevator.configurePID();
     	Robot.elevator.setUpperLimitSwitch();
+    	Robot.elevator.setElevatorPID(targetDistance);
     	SmartDashboard.putString("Elevator","Returned from PID control");
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	int targetDistance = 5000;
     	Robot.elevator.printPID();
     	Robot.elevator.printEncoders();
     	String s = " execute "+ counter++;
     	SmartDashboard.putString("Elevator",s);
-    	Robot.elevator.setElevatorPID(targetDistance);
     }
 
     // Make this return true when this Command no longer needs to run execute()

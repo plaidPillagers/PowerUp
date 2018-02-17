@@ -38,9 +38,9 @@ public class ElevatorGoingDown extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	int targetDistance = -500;
+    	int targetDistance = -50000;
     	Robot.elevator.configurePID();
-    	Robot.elevator.setUpperLimitSwitch();
+    	Robot.elevator.setLowerLimitSwitch();
     	Robot.elevator.setElevatorPID(targetDistance);
     }
 
