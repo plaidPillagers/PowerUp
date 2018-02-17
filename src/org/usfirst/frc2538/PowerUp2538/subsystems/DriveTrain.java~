@@ -20,7 +20,6 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -185,7 +184,7 @@ public class DriveTrain extends Subsystem {
 //			SmartDashboard.putString("obstacle", "yes");
 //			return false;
 //		} else {
-			double encoderValue = talonSRX3.getSensorCollection().getQuadraturePosition();
+			double encoderValue = talonSRX1.getSensorCollection().getQuadraturePosition();
 			if (findRearDistance() <= distanceToWall && encoderValue < wheelEncoderValue + length) {
 				differentialDrive1.arcadeDrive(x, 0);
 				SmartDashboard.putNumber("not h wheel encoder", encoderValue);

@@ -159,6 +159,11 @@ public class Elevator extends Subsystem {
     	talonSRX42.set(ControlMode.Disabled,0);
     	talonSRX5.set(ControlMode.Disabled,0);
     }
+    public boolean noVoltage(){
+    	return talonSRX42.getMotorOutputVoltage()<0.05 
+    			&& talonSRX42.getMotorOutputVoltage()>-0.05;
+    			
+    }
     
 }   
 
