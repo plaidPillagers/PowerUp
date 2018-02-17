@@ -11,6 +11,8 @@
 
 package org.usfirst.frc2538.PowerUp2538.commands;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc2538.PowerUp2538.Robot;
 
 /**
@@ -42,6 +44,8 @@ public class ElevatorGoingDown extends Command {
     	Robot.elevator.configurePID();
     	Robot.elevator.setLowerLimitSwitch();
     	Robot.elevator.setElevatorPID(targetDistance);
+    	SmartDashboard.putString("PID disabled", "no");
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run

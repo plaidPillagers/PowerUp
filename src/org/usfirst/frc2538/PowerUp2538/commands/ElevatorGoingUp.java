@@ -45,6 +45,7 @@ public class ElevatorGoingUp extends Command {
     	Robot.elevator.setUpperLimitSwitch();
     	Robot.elevator.setElevatorPID(targetDistance);
     	SmartDashboard.putString("Elevator","Returned from PID control");
+    	SmartDashboard.putString("PID disabled", "no");
     }
 
     // Called repeatedly when this Command is scheduled to run
