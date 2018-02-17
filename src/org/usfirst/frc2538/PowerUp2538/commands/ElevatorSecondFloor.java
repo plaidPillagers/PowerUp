@@ -40,7 +40,7 @@ public class ElevatorSecondFloor extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	int targetDistance = 50000; // height of second floor
+    	int targetDistance = 100000; // height of second floor
     	Robot.elevator.configurePID();
     	Robot.elevator.setUpperLimitSwitch();
     	Robot.elevator.setLowerLimitSwitch();

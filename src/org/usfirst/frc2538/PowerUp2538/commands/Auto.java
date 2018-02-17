@@ -50,6 +50,7 @@ public class Auto extends CommandGroup {
     	addSequential(new AutoDriveAngle(-0.7,0.5,2000), 3);
     	addSequential(new AutoContinueMoving(),2);
     	addSequential(new AutoDriveStraight(-0.7),3);
+    	addSequential(new AutoElevatorUp(),4);
 
     } 
 }

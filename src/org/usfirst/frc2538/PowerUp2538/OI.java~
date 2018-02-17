@@ -83,9 +83,9 @@ public class OI {
         switchElevatorToManual = new JoystickButton(elevatorJoystick, 3);
         switchElevatorToManual.whenPressed(new ElevatorManual());
         elevatorDown = new JoystickButton(elevatorJoystick, 1);
-        elevatorDown.whileHeld(new ElevatorGoingDown());
+        elevatorDown.whileHeld(new ElevatorGroundFloor());
         elevatorUp = new JoystickButton(elevatorJoystick, 5);
-        elevatorUp.whenPressed(new ElevatorGoingUp());
+        elevatorUp.whenPressed(new ElevatorSecondFloor());
         joystick1 = new Joystick(0);
         
         output = new JoystickButton(joystick1, 1);

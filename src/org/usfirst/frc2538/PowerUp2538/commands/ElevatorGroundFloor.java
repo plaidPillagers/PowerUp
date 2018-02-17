@@ -40,9 +40,10 @@ public class ElevatorGroundFloor extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	int targetDistance = -50000;
+    	int targetDistance = 1000; // a bit above the limit switch
     	Robot.elevator.configurePID();
     	Robot.elevator.setLowerLimitSwitch();
+    	Robot.elevator.setUpperLimitSwitch();
     	Robot.elevator.setElevatorPID(targetDistance);
     	SmartDashboard.putString("PID disabled", "no");
     	
