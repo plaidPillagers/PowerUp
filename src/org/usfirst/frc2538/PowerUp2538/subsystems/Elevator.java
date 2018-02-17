@@ -161,10 +161,24 @@ public class Elevator extends Subsystem {
     }
     public boolean noVoltage(){
     	return talonSRX42.getMotorOutputVoltage()<0.05 
-    			&& talonSRX42.getMotorOutputVoltage()>-0.05;
-    			
+    			&& talonSRX42.getMotorOutputVoltage()>-0.05;		
     }
-    
+    public boolean hitTheDeck(){
+    	boolean theSwitch = talonSRX42.getSensorCollection().isFwdLimitSwitchClosed();
+    	if(theSwitch == true) {
+    		talonSRX42.set(0.5);
+    		talonSRX5.set(0.5);
+    	} else {
+    		talonSRX42.set(0);
+    		talonSRX5.set(0);
+    		talonSRX42.getSensorCollection().setQuadraturePosition(0, 0);
+    	}
+    	return theSwitch;		
+    }
+   public void stop(){
+	   talonSRX42.set(0);
+	   talonSRX5.set(0);
+   }
 }   
 
 

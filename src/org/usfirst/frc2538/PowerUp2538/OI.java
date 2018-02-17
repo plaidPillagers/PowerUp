@@ -58,6 +58,7 @@ public class OI {
     public JoystickButton raisingBox;
     public JoystickButton loweringBox;
     public JoystickButton output;
+    public JoystickButton hitTheDeck;
     public Joystick joystick1;
     public JoystickButton elevatorUp;
     public JoystickButton elevatorDown;
@@ -91,6 +92,8 @@ public class OI {
         elevatorUp.whenPressed(new ElevatorSecondFloor());
         joystick1 = new Joystick(0);
         
+        hitTheDeck = new JoystickButton(joystick1, 10);
+        hitTheDeck.whileHeld(new HitGroundFloor());
         output = new JoystickButton(joystick1, 1);
         output.whileHeld(new ReportSensors());
         loweringBox = new JoystickButton(joystick1, 11);
