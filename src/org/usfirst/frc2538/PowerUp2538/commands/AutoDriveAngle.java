@@ -53,12 +53,13 @@ public class AutoDriveAngle extends Command {
     	} else if (!Robot.goLeft && m_y < 0) {
     		m_y = (-1)*m_y; // positive for right
     	}
+    	Robot.driveTrain.setXYWidth(m_x, m_y, m_width);
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	isfinished = Robot.driveTrain.driveAngle(m_x, m_y, m_width);
+    	isfinished = Robot.driveTrain.driveAngle();
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -110,8 +110,17 @@ public class DriveTrain extends Subsystem {
 		return true;
 
 	}
+	
+	private double x;
+	private double y;
+	private double width;
+	public void setXYWidth(double x, double y,double width){
+		this.x = x;
+		this.y = y;
+		this.width = width;
+	}
 
-	public boolean driveAngle(double x, double y, double width) {
+	public boolean driveAngle() {
 		// TODO: make sure we are not pausing at the switch
 		double encoderValue = centerMotor.getSensorCollection().getQuadraturePosition();
 		if (delayed && timer.get() < delayTime) {
@@ -141,7 +150,7 @@ public class DriveTrain extends Subsystem {
 		}
 	}
 	
-	public boolean driveAngleNoMatterWhat(double x, double y, double width) {
+	public boolean driveAngleNoMatterWhat() {
 		double encoderValue = centerMotor.getSensorCollection().getQuadraturePosition();
 		 if (encoderValue < centerEncoderValue + width) {
 			differentialDrive1.arcadeDrive(x, 0);
