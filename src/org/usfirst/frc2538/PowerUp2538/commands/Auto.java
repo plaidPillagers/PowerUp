@@ -46,9 +46,9 @@ public class Auto extends CommandGroup {
     	// negative y means "left"; x is always positive, h is the number of rotations 
     	// of h wheel:
     	addSequential(new AutoLowerHWheel(),1);
-    	addSequential(new AutoDriveAngle(-0.7,0.5,5000), 3);
+    	addSequential(new AutoDriveAngle(-0.7,0.5,2000), 5);
     	addSequential(new AutoContinueMoving(),2);
-    	addSequential(new AutoDriveStraight(-0.7, 1000),3);
+    	addSequential(new AutoDriveStraight(-0.7, 50000),7);
     	addSequential(new AutoElevatorUp(),3);
     	addSequential(new AutoExtendBoxClappers(),1);// return is false so it needs to timeout
     	addSequential(new AutoPutBlock(),4);

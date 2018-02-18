@@ -42,10 +42,9 @@ public class AutoDriveStraight extends Command {
     public AutoDriveStraight(double x, double length) {
 
         m_x = x;
+        m_length = length;
 
         requires(Robot.elevator);
-
-        m_length = length;
     }
 
     // Called just before this Command runs the first time

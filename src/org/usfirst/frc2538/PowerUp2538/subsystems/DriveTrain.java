@@ -124,6 +124,7 @@ public class DriveTrain extends Subsystem {
 		double encoderValue = centerMotor.getSensorCollection().getQuadraturePosition();
 		if (delayed && timer.get() < delayTime) {
 			differentialDrive1.arcadeDrive(0, 0);
+			differentialDrive2.arcadeDrive(0,0);
 			SmartDashboard.putBoolean("delayed", delayed);
 			return false;
 		} else if (delayed && timer.get() >= delayTime) {
@@ -139,11 +140,13 @@ public class DriveTrain extends Subsystem {
 			return false;
 		} else if (encoderValue < centerEncoderValue + width) {
 			differentialDrive1.arcadeDrive(x, 0);
+			differentialDrive2.arcadeDrive(x,0);
 			centerMotor.set(y);
 			SmartDashboard.putNumber("h wheel encoder", encoderValue);
 			return false;
 		} else {
 			differentialDrive1.arcadeDrive(0, 0);
+			differentialDrive2.arcadeDrive(0,0);
 			centerMotor.set(0);
 			return true;
 		}
@@ -153,11 +156,13 @@ public class DriveTrain extends Subsystem {
 		double encoderValue = centerMotor.getSensorCollection().getQuadraturePosition();
 		 if (encoderValue < centerEncoderValue + width) {
 			differentialDrive1.arcadeDrive(x, 0);
+			differentialDrive2.arcadeDrive(x,0);
 			centerMotor.set(y);
 			SmartDashboard.putNumber("h wheel encoder", encoderValue);
 			return false;
 		} else {
 			differentialDrive1.arcadeDrive(0, 0);
+			differentialDrive2.arcadeDrive(0,0);
 			centerMotor.set(0);
 			return true;
 		}
@@ -187,11 +192,13 @@ public class DriveTrain extends Subsystem {
 			double encoderValue = talonSRX1.getSensorCollection().getQuadraturePosition();
 			if (findRearDistance() <= distanceToWall && encoderValue < wheelEncoderValue + length) {
 				differentialDrive1.arcadeDrive(x, 0);
+				differentialDrive2.arcadeDrive(x, 0);
 				SmartDashboard.putNumber("not h wheel encoder", encoderValue);
 				SmartDashboard.putString("Moving forward", "yes");
 				return false;
 			} else {
 				differentialDrive1.arcadeDrive(0, 0);
+				differentialDrive2.arcadeDrive(0,0);
 				SmartDashboard.putString("Wall detected", "yes");
 				return true;
 			}
