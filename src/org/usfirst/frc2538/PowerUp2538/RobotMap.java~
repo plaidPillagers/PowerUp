@@ -114,7 +114,7 @@ public class RobotMap {
         liftDoubleSolenoid4 = new DoubleSolenoid(20, 6, 7);
         LiveWindow.addActuator("Lift", "Double Solenoid 4", liftDoubleSolenoid4);
         
-        boxClappersDoubleSolenoid5 = new DoubleSolenoid(0, 4, 5);
+        boxClappersDoubleSolenoid5 = new DoubleSolenoid(0, 2, 3);
         LiveWindow.addActuator("BoxClappers", "Double Solenoid 5", boxClappersDoubleSolenoid5);
         
         boxClappersTalonSRX8 = new WPI_TalonSRX(8);

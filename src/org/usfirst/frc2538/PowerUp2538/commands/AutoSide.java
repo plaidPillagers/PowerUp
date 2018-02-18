@@ -49,8 +49,9 @@ public class AutoSide extends CommandGroup {
     	addSequential(new AutoLowerHWheel(),1);
     	addSequential(new AutoDriveAngle(-0.7,0.5,1500), 3);
     	addSequential(new AutoContinueMoving(),2);
-    	addSequential(new AutoDriveStraight(-0.7),3);
+    	addSequential(new AutoDriveStraight(-0.7, 1000),3);
     	addSequential(new AutoElevatorUp(),4);
+    	addSequential(new AutoExtendBoxClappers(),1);// return is false so it needs to timeout
     	addSequential(new AutoPutBlock(),4);
 
     } 

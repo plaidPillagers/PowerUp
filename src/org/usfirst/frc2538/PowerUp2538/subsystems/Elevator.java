@@ -95,7 +95,7 @@ public class Elevator extends Subsystem {
     
     public void moveElevatormanually(){
     	double y = elevatorJoystick.getY();
-     	talonSRX42.set(y);
+     	talonSRX42.set(-y);
     	int ecv = talonSRX42.getSensorCollection().getQuadraturePosition();
 		SmartDashboard.putNumber(" encoder", ecv);
 		
@@ -152,6 +152,8 @@ public class Elevator extends Subsystem {
     	SmartDashboard.putNumber("encoder 42 value", wheelEncoderValue);
     	SmartDashboard.putBoolean("Forward switch closed ", talonSRX42.getSensorCollection().isFwdLimitSwitchClosed());
     	SmartDashboard.putBoolean("Reverse switch closed ", talonSRX42.getSensorCollection().isRevLimitSwitchClosed());
+    	SmartDashboard.putNumber("motorvoltage",talonSRX42.getMotorOutputVoltage());
+    	
     	//wheelEncoderValue = talonSRX5.getSensorCollection().getQuadraturePosition();
     	//SmartDashboard.putNumber("encoder 5 value", wheelEncoderValue):
     }
@@ -164,10 +166,10 @@ public class Elevator extends Subsystem {
     			&& talonSRX42.getMotorOutputVoltage()>-0.05;		
     }
     public boolean hitTheDeck(){
-    	boolean theSwitch = talonSRX42.getSensorCollection().isFwdLimitSwitchClosed();
-    	if(theSwitch == true) {
-    		talonSRX42.set(0.5);
-    		talonSRX5.set(0.5);
+    	boolean theSwitch = talonSRX42.getSensorCollection().isRevLimitSwitchClosed();
+    	if(theSwitch == false) {
+    		talonSRX42.set(-0.2);
+    		talonSRX5.set(-0.2);
     	} else {
     		talonSRX42.set(0);
     		talonSRX5.set(0);

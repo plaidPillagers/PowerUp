@@ -75,6 +75,11 @@ public class BoxClappers extends Subsystem {
     	talonSRX8.set(speed);
     	SmartDashboard.putString("spit  clappers", "yes");
     	}
-    
+    public void extendClappers(){
+    	doubleSolenoid5.set(DoubleSolenoid.Value.kForward);
+    }
+    public void retractClappers(){
+    	doubleSolenoid5.set(DoubleSolenoid.Value.kReverse);
+    }
 }
 
