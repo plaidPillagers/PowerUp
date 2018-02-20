@@ -90,10 +90,13 @@ public class Elevator extends Subsystem {
     
     public void setElevatorPID(double target){
     	talonSRX5.follow(talonSRX42);
+    	talonSRX5.setInverted(true);
     	talonSRX42.set(ControlMode.Position,target);    	
     }
     
     public void moveElevatormanually(){
+    	talonSRX5.follow(talonSRX42);
+    	talonSRX5.setInverted(true);
     	double y = elevatorJoystick.getY();
      	talonSRX42.set(-y);
     	int ecv = talonSRX42.getSensorCollection().getQuadraturePosition();

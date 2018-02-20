@@ -11,6 +11,8 @@
 
 package org.usfirst.frc2538.PowerUp2538.commands;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc2538.PowerUp2538.Robot;
 
 /**
@@ -40,6 +42,9 @@ public class AutoContinueMoving extends Command {
     @Override
     protected void initialize() {
     	isFinished = Robot.driveTrain.needToContinue();
+    	Robot.driveTrain.setGyroAngle();
+    	SmartDashboard.putString("Wall detected", "no");
+    	isFinished=false;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -57,11 +62,13 @@ public class AutoContinueMoving extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
+    	Robot.driveTrain.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+    	Robot.driveTrain.stop();
     }
 }

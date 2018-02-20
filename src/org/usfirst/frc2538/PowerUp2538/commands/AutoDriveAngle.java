@@ -58,12 +58,15 @@ public class AutoDriveAngle extends Command {
     	Robot.driveTrain.setXYWidth(m_x, m_y, m_width);
     	SmartDashboard.putNumber("Auto m_y", m_y);
     	SmartDashboard.putNumber("Auto m_width" ,m_width);
+    	Robot.driveTrain.setGyroAngle();
+    	SmartDashboard.putString("Wall detected", "no");
+    	isfinished=false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	isfinished = Robot.driveTrain.driveAngle();
+    	isfinished = Robot.driveTrain.driveAngleNoMatterWhat();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -75,11 +78,13 @@ public class AutoDriveAngle extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
+    	Robot.driveTrain.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+    	Robot.driveTrain.stop();
     }
 }

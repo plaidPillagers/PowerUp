@@ -12,6 +12,8 @@
 package org.usfirst.frc2538.PowerUp2538.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+
+import org.usfirst.frc2538.PowerUp2538.Robot;
 import org.usfirst.frc2538.PowerUp2538.subsystems.*;
 
 /**
@@ -46,9 +48,9 @@ public class Auto extends CommandGroup {
     	// negative y means "left"; x is always positive, h is the number of rotations 
     	// of h wheel:
     	addSequential(new AutoLowerHWheel(),1);
-    	addSequential(new AutoDriveAngle(-0.7,0.5,2000), 5);
-    	addSequential(new AutoContinueMoving(),2);
-    	addSequential(new AutoDriveStraight(-0.7, 50000),7);
+    	addSequential(new AutoDriveAngle(-0.4,0.1,4*Robot.driveTrain.hWheelCountsPerFt), 7);
+    	//addSequential(new AutoContinueMoving(),7);
+    	addSequential(new AutoDriveStraight(-0.7, 5*Robot.driveTrain.mainWheelCountsPerFt),7);
     	addSequential(new AutoElevatorUp(),3);
     	addSequential(new AutoExtendBoxClappers(),1);// return is false so it needs to timeout
     	addSequential(new AutoPutBlock(),4);
