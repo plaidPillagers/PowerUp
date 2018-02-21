@@ -62,8 +62,8 @@ public class DriveTrain extends Subsystem {
 	private double gyroAngle;
 	private final double tolerance=3.0;
 	private final double scaleAdjust=0.02;
-	public final int hWheelCountsPerFt = 500;
-	public final int mainWheelCountsPerFt = 500;
+	public final int hWheelCountsPerFt = 9750;
+	public final int mainWheelCountsPerFt = 2200;
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
@@ -84,8 +84,8 @@ public class DriveTrain extends Subsystem {
 		double y = driveJoystick.getY();
 		double x = driveJoystick.getX();
 		double z = driveJoystick.getZ();
-		String s = "Now Moving " + x + " " + z + " counter = " + counter;
-		SmartDashboard.putString("Drive train", s);
+		//String s = "Now Moving " + x + " " + z + " counter = " + counter;
+		//SmartDashboard.putString("Drive train", s);
 		differentialDrive1.arcadeDrive(y, +z);
 		differentialDrive2.arcadeDrive(y, +z);
 		centerMotor.set(x);
@@ -161,7 +161,7 @@ public class DriveTrain extends Subsystem {
 	
 	public boolean driveAngleNoMatterWhat() {
 		double encoderValue = centerMotor.getSensorCollection().getQuadraturePosition();
-		 if (encoderValue < centerEncoderValue + width) {				
+		 if (Math.abs(encoderValue - centerEncoderValue) < width) {				
 			double adjScale = getGyroAdjustments();
 			differentialDrive1.arcadeDrive(x, adjScale);
 			differentialDrive2.arcadeDrive(x, adjScale);
@@ -183,10 +183,10 @@ public class DriveTrain extends Subsystem {
 	public boolean driveStraight(double x, double length) {
 			double encoderValue = talonSRX1.getSensorCollection().getQuadraturePosition();
 			SmartDashboard.putNumber("Drive motor encoder", encoderValue);
-			double rangeFinderValue = findRearDistance();
-			SmartDashboard.putNumber("Range finder to the wall",  rangeFinderValue);
+			//double rangeFinderValue = findRearDistance();
+			//SmartDashboard.putNumber("Range finder to the wall",  rangeFinderValue);
 			//if (rangeFinderValue <= distanceToWall && encoderValue < wheelEncoderValue + length) {
-			if (encoderValue < wheelEncoderValue + length) {
+			if (Math.abs(encoderValue - centerEncoderValue) < length) {
 				double adjScale = getGyroAdjustments();
 				differentialDrive1.arcadeDrive(x, adjScale);
 				differentialDrive2.arcadeDrive(x, adjScale);
@@ -279,6 +279,9 @@ public class DriveTrain extends Subsystem {
 		differentialDrive1.arcadeDrive(0, 0);
 		differentialDrive2.arcadeDrive(0, 0);
 		centerMotor.set(0);
+	}
+	public double getEncoder(){
+		return talonSRX1.getSensorCollection().getQuadraturePosition();
 	}
 	
 }

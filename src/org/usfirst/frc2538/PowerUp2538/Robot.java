@@ -81,6 +81,7 @@ public class Robot extends TimedRobot {
         chooser.addObject("Go to the scale", new AutoScale());
         SmartDashboard.putData("Auto Mode",chooser);
         Robot.lift.lowerFrame();
+        Robot.boxClappers.retractClappers();
     }
 
     /**

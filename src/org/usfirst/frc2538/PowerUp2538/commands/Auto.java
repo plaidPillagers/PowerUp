@@ -48,7 +48,8 @@ public class Auto extends CommandGroup {
     	// negative y means "left"; x is always positive, h is the number of rotations 
     	// of h wheel:
     	addSequential(new AutoLowerHWheel(),1);
-    	addSequential(new AutoDriveAngle(-0.4,0.1,4*Robot.driveTrain.hWheelCountsPerFt), 7);
+    	addSequential(new AutoSaveEncoders());
+    	addSequential(new AutoDriveAngle(-0.6,0.3,4*Robot.driveTrain.hWheelCountsPerFt),3);
     	//addSequential(new AutoContinueMoving(),7);
     	addSequential(new AutoDriveStraight(-0.7, 5*Robot.driveTrain.mainWheelCountsPerFt),7);
     	addSequential(new AutoElevatorUp(),3);

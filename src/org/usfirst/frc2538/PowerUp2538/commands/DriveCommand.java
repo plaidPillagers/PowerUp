@@ -11,6 +11,8 @@
 
 package org.usfirst.frc2538.PowerUp2538.commands;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc2538.PowerUp2538.Robot;
 
 /**
@@ -44,6 +46,7 @@ public class DriveCommand extends Command {
     @Override
     protected void execute() {
     	Robot.driveTrain.drive();
+    	SmartDashboard.putNumber("mainWheelEncoder", Robot.driveTrain.getEncoder());
     }
 
     // Make this return true when this Command no longer needs to run execute()

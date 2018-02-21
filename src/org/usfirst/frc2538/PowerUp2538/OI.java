@@ -94,9 +94,9 @@ public class OI {
         hitTheDeck.whileHeld(new HitGroundFloor());
         output = new JoystickButton(joystick1, 1);
         output.whileHeld(new ReportSensors());
-        loweringBox = new JoystickButton(joystick1, 11);
+        loweringBox = new JoystickButton(joystick1, 8);
         loweringBox.whenPressed(new Lower());
-        raisingBox = new JoystickButton(joystick1, 12);
+        raisingBox = new JoystickButton(joystick1, 7);
         raisingBox.whenPressed(new Raise());
         switchHWheel = new JoystickButton(joystick1, 1);
         switchHWheel.whenPressed(new ToggleHWheel());
