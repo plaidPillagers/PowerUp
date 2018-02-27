@@ -14,7 +14,7 @@ Children:
             default: '2'
             name: CAN ID
             validators: &id002 [CANID]
-            value: '1'
+            value: '9'
         Base: Talon SRX
         Name: Talon SRX 1
       - Children: []
@@ -24,7 +24,7 @@ Children:
             default: '2'
             name: CAN ID
             validators: *id002
-            value: '4'
+            value: '5'
         Base: Talon SRX
         Name: Talon SRX 3
       Properties:
@@ -204,7 +204,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '9'
+          value: '19'
       Base: Talon SRX
       Name: Talon SRX 42
     - Children: []
@@ -214,7 +214,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '5'
+          value: '15'
       Base: Talon SRX
       Name: Talon SRX 5
     Properties:
@@ -579,7 +579,7 @@ Children:
           default: whileHeld
           name: When to Run
           validators: null
-          value: whileHeld
+          value: whenPressed
       Base: Joystick Button
       Name: HitTheDeck
     Properties:
@@ -647,7 +647,7 @@ Children:
           default: whileHeld
           name: When to Run
           validators: null
-          value: whileHeld
+          value: whenPressed
       Base: Joystick Button
       Name: ElevatorDown
     - Children: []
@@ -1473,10 +1473,10 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: DriveTrain}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id022 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id022
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
     Base: Command

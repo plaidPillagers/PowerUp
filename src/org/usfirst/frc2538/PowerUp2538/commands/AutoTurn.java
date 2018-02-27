@@ -41,7 +41,7 @@ public class AutoTurn extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		if (Robot.goLeft && z > 0) {
+		if (Robot.scaleLeft && z > 0) {
 			z = -z;
 		} else if (z < 0) {
 			z = -z;

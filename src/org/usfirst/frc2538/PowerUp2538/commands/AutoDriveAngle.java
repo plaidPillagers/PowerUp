@@ -50,9 +50,9 @@ public class AutoDriveAngle extends Command {
     protected void initialize() {
     	Robot.driveTrain.saveEncoderValues();
     	Robot.driveTrain.initAutoVariables();
-    	if (Robot.goLeft && m_y > 0){
+    	if (Robot.switchLeft && m_y > 0){
     		m_y = (-1)*m_y; //negative go left*
-    	} else if (!Robot.goLeft && m_y < 0) {
+    	} else if (!Robot.switchLeft && m_y < 0) {
     		m_y = (-1)*m_y; // positive for right
     	}
     	Robot.driveTrain.setXYWidth(m_x, m_y, m_width);

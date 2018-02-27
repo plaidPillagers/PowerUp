@@ -178,15 +178,19 @@ public class Elevator extends Subsystem {
     	return talonSRX42.getMotorOutputVoltage()<0.05 
     			&& talonSRX42.getMotorOutputVoltage()>-0.05;		
     }
+    
+    private int htdCount=0;
     public boolean hitTheDeck(){
     	talonSRX5.setInverted(true);
+    	talonSRX5.follow(talonSRX42);
     	boolean theSwitch = talonSRX42.getSensorCollection().isRevLimitSwitchClosed();
+    	SmartDashboard.putNumber("hit Pid count",htdCount++);
     	if(theSwitch) {
     		talonSRX42.set(0.4);
-    		talonSRX5.set(0.4);
+    		SmartDashboard.putString("hit pid", "yes");
     	} else {
     		talonSRX42.set(0);
-    		talonSRX5.set(0);
+    		SmartDashboard.putString("hit pid", "stop");
     		talonSRX42.getSensorCollection().setQuadraturePosition(0, 0);
     	}
     	return !theSwitch;		

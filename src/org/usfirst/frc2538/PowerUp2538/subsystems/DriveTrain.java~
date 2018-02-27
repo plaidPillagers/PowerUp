@@ -84,8 +84,8 @@ public class DriveTrain extends Subsystem {
 		double y = driveJoystick.getY();
 		double x = driveJoystick.getX();
 		double z = driveJoystick.getZ();
-		String s = "Now Moving " + x + " " + z + " counter = " + counter;
-		SmartDashboard.putString("Drive train", s);
+		//String s = "Now Moving " + x + " " + z + " counter = " + counter;
+		//SmartDashboard.putString("Drive train", s);
 		differentialDrive1.arcadeDrive(y, +z);
 		differentialDrive2.arcadeDrive(y, +z);
 		centerMotor.set(x);
@@ -183,8 +183,8 @@ public class DriveTrain extends Subsystem {
 	public boolean driveStraight(double x, double length) {
 			double encoderValue = talonSRX1.getSensorCollection().getQuadraturePosition();
 			SmartDashboard.putNumber("Drive motor encoder", encoderValue);
-			double rangeFinderValue = findRearDistance();
-			SmartDashboard.putNumber("Range finder to the wall",  rangeFinderValue);
+			//double rangeFinderValue = findRearDistance();
+			//SmartDashboard.putNumber("Range finder to the wall",  rangeFinderValue);
 			//if (rangeFinderValue <= distanceToWall && encoderValue < wheelEncoderValue + length) {
 			if (Math.abs(encoderValue - centerEncoderValue) < length) {
 				double adjScale = getGyroAdjustments();
