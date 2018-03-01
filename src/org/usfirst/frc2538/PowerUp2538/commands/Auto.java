@@ -48,8 +48,7 @@ public class Auto extends CommandGroup {
     	
     	// negative y means "left"; x is always positive, h is the number of rotations 
     	// of h wheel:
-    	Robot.ourSide='M';
-    	SmartDashboard.putString("ourSide", "M");
+
     	addSequential(new AutoLowerHWheel(),1);
     	addSequential(new AutoSaveEncoders());
     	addSequential(new AutoDriveAngle(-0.6,0.3,4*Robot.driveTrain.hWheelCountsPerFt),3);
@@ -59,4 +58,10 @@ public class Auto extends CommandGroup {
     	addSequential(new AutoExtendBoxClappers(),1);// return is false so it needs to timeout
     	addSequential(new AutoPutBlock(),4);
     } 
+    
+    protected void initialize() {
+    	super.initialize();
+    	Robot.ourSide='M';
+    	SmartDashboard.putString("ourSide", "M");
+    }
 }

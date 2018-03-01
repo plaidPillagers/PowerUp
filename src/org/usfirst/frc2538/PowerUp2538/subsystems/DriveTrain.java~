@@ -186,7 +186,7 @@ public class DriveTrain extends Subsystem {
 			//double rangeFinderValue = findRearDistance();
 			//SmartDashboard.putNumber("Range finder to the wall",  rangeFinderValue);
 			//if (rangeFinderValue <= distanceToWall && encoderValue < wheelEncoderValue + length) {
-			if (Math.abs(encoderValue - centerEncoderValue) < length) {
+			if (Math.abs(encoderValue - wheelEncoderValue) < length) {
 				double adjScale = getGyroAdjustments();
 				differentialDrive1.arcadeDrive(x, adjScale);
 				differentialDrive2.arcadeDrive(x, adjScale);

@@ -84,6 +84,8 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData("Auto Mode",chooser);
         Robot.lift.lowerFrame();
         Robot.boxClappers.retractClappers();
+        Robot.lift.hookUp = true;
+        Robot.lift.toggleHook();
     }
 
     /**
@@ -126,6 +128,7 @@ public class Robot extends TimedRobot {
     		scaleLeft = false;
 		}
 		autonomousCommand = chooser.getSelected();
+		SmartDashboard.putString("The command is:", autonomousCommand.getClass().toString());
 		Robot.driveTrain.initAutoVariables();
 		
 	        // schedule the autonomous command (example)

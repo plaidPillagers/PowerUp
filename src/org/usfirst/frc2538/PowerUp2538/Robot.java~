@@ -126,6 +126,7 @@ public class Robot extends TimedRobot {
     		scaleLeft = false;
 		}
 		autonomousCommand = chooser.getSelected();
+		SmartDashboard.putString("The command is:", autonomousCommand.getClass().toString());
 		Robot.driveTrain.initAutoVariables();
 		
 	        // schedule the autonomous command (example)
