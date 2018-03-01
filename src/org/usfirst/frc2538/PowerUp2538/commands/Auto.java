@@ -12,6 +12,7 @@
 package org.usfirst.frc2538.PowerUp2538.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc2538.PowerUp2538.Robot;
 import org.usfirst.frc2538.PowerUp2538.subsystems.*;
@@ -47,6 +48,8 @@ public class Auto extends CommandGroup {
     	
     	// negative y means "left"; x is always positive, h is the number of rotations 
     	// of h wheel:
+    	Robot.ourSide='M';
+    	SmartDashboard.putString("ourSide", "M");
     	addSequential(new AutoLowerHWheel(),1);
     	addSequential(new AutoSaveEncoders());
     	addSequential(new AutoDriveAngle(-0.6,0.3,4*Robot.driveTrain.hWheelCountsPerFt),3);

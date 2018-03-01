@@ -48,20 +48,24 @@ public class AutoDriveAngle extends Command {
 
     @Override
     protected void initialize() {
-    	Robot.driveTrain.saveEncoderValues();
-    	Robot.driveTrain.initAutoVariables();
-    	if (Robot.switchLeft && m_y > 0){
-    		m_y = (-1)*m_y; //negative go left*
-    	} else if (!Robot.switchLeft && m_y < 0) {
-    		m_y = (-1)*m_y; // positive for right
-    	}
-    	Robot.driveTrain.setXYWidth(m_x, m_y, m_width);
-    	SmartDashboard.putNumber("Auto m_y", m_y);
-    	SmartDashboard.putNumber("Auto m_width" ,m_width);
-    	Robot.driveTrain.setGyroAngle();
-    	SmartDashboard.putString("Wall detected", "no");
-    	isfinished=false;
-    }
+    	if ((Robot.ourSide!='M') && (Robot.ourSide != Robot.switchLetter)) {
+    		isfinished = true;
+		} else {
+			Robot.driveTrain.saveEncoderValues();
+			Robot.driveTrain.initAutoVariables();
+			if (Robot.switchLeft && m_y > 0) {
+				m_y = (-1) * m_y; // negative go left*
+			} else if (!Robot.switchLeft && m_y < 0) {
+				m_y = (-1) * m_y; // positive for right
+			}
+			Robot.driveTrain.setXYWidth(m_x, m_y, m_width);
+			SmartDashboard.putNumber("Auto m_y", m_y);
+			SmartDashboard.putNumber("Auto m_width", m_width);
+			Robot.driveTrain.setGyroAngle();
+			SmartDashboard.putString("Wall detected", "no");
+			isfinished = false;
+		}
+	}
 
     // Called repeatedly when this Command is scheduled to run
     @Override
