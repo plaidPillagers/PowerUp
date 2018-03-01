@@ -65,10 +65,10 @@ public class AutoSide extends CommandGroup {
     	// Going to the scale
     	addSequential(new AutoLiftHWheel(),0.5);
     	addSequential(new AutoSaveEncoders());
-    	addSequential(new AutoDriveStraight(-0.7,12*Robot.driveTrain.mainWheelCountsPerFt),5);
-    	addParallel(new ElevatorSecondFloor(),4);
+    	addSequential(new AutoDriveStraightScale(-0.7,12*Robot.driveTrain.mainWheelCountsPerFt),5);
+    	addParallel(new AutoElevatorSecondFloorScale(),4);
     	addSequential(new AutoSaveEncoders());
-    	addSequential(new AutoDriveStraight(-0.7,10*Robot.driveTrain.mainWheelCountsPerFt),4);
+    	addSequential(new AutoDriveStraightScale(-0.7,10*Robot.driveTrain.mainWheelCountsPerFt),4);
     	addSequential(new AutoTurn(),3);
     	addSequential(new AutoExtendClappersScale(),1);
     	addSequential(new AutoPutBoxScale(),2);

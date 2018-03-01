@@ -66,7 +66,7 @@ public class AutoDriveStraight extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		isFinished = Robot.driveTrain.driveStraight(m_x, m_length);
+		isFinished = (isFinished || Robot.driveTrain.driveStraight(m_x, m_length));
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
