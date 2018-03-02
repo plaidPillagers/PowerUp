@@ -62,8 +62,8 @@ public class OI {
     public JoystickButton elevatorUp;
     public JoystickButton elevatorDown;
     public JoystickButton switchElevatorToManual;
-    public JoystickButton pickUpBox;
     public JoystickButton spitOutBox;
+    public JoystickButton pickUpBox;
     public JoystickButton firstFloor;
     public JoystickButton boxClappersToggled;
     public Joystick elevatorJoystick;
@@ -79,10 +79,10 @@ public class OI {
         boxClappersToggled.whenPressed(new ToggleBoxClappers());
         firstFloor = new JoystickButton(elevatorJoystick, 5);
         firstFloor.whenPressed(new ElevatorFirstFloor());
-        spitOutBox = new JoystickButton(elevatorJoystick, 6);
-        spitOutBox.whenPressed(new SpitOutClappers());
         pickUpBox = new JoystickButton(elevatorJoystick, 4);
-        pickUpBox.whenPressed(new SpinClappers());
+        pickUpBox.whileHeld(new SpinClappers());
+        spitOutBox = new JoystickButton(elevatorJoystick, 6);
+        spitOutBox.whileHeld(new SpitOutClappers());
         switchElevatorToManual = new JoystickButton(elevatorJoystick, 1);
         switchElevatorToManual.whenPressed(new ElevatorManualMovement());
         elevatorDown = new JoystickButton(elevatorJoystick, 2);

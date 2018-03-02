@@ -57,6 +57,7 @@ public class OI {
     public JoystickButton loweringBox;
     public JoystickButton output;
     public JoystickButton hitTheDeck;
+    public JoystickButton toggleHook;
     public Joystick joystick1;
     public JoystickButton elevatorUp;
     public JoystickButton elevatorDown;
@@ -90,6 +91,8 @@ public class OI {
         elevatorUp.whenPressed(new ElevatorSecondFloor());
         joystick1 = new Joystick(0);
         
+        toggleHook = new JoystickButton(joystick1, 9);
+        toggleHook.whenPressed(new HookToggle());
         hitTheDeck = new JoystickButton(joystick1, 10);
         hitTheDeck.whenPressed(new HitGroundFloor());
         output = new JoystickButton(joystick1, 1);

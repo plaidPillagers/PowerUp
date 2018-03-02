@@ -750,21 +750,21 @@ Children:
           default: '1'
           name: Button
           validators: null
-          value: '4'
+          value: '6'
         Command: !!robotbuilder.data.properties.TypeSelectionProperty
           default: None
           name: Command
           type: Command
           validators: *id017
-          value: SpinClappers
+          value: SpitOutClappers
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id018
           default: whileHeld
           name: When to Run
           validators: null
-          value: whenPressed
+          value: whileHeld
       Base: Joystick Button
-      Name: PickUpBox
+      Name: SpitOutBox
     - Children: []
       Properties:
         Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
@@ -779,21 +779,21 @@ Children:
           default: '1'
           name: Button
           validators: null
-          value: '6'
+          value: '4'
         Command: !!robotbuilder.data.properties.TypeSelectionProperty
           default: None
           name: Command
           type: Command
           validators: *id017
-          value: SpitOutClappers
+          value: SpinClappers
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id018
           default: whileHeld
           name: When to Run
           validators: null
-          value: whenPressed
+          value: whileHeld
       Base: Joystick Button
-      Name: SpitOutBox
+      Name: PickUpBox
     - Children: []
       Properties:
         Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
